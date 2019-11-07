@@ -65,6 +65,8 @@ public class FishMaster : MonoBehaviour
         position.y *= Random.Range(-1f, 1f);
         position.z *= Random.Range(-1f, 1f);
 
+        position += transform.position;
+
         return position;
     }
 

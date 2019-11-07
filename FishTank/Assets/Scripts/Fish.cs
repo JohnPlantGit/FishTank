@@ -21,14 +21,12 @@ public class Fish : MonoBehaviour
     Vector3 m_velocity;
     bool m_hasTarget;
     FishState m_state = FishState.Swimming;
-    CharacterController m_characterController;
 
     // Start is called before the first frame update
     void Start()
     {
         m_target = m_master.RandomPosition();
         m_hasTarget = true;
-        m_characterController = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -66,7 +64,8 @@ public class Fish : MonoBehaviour
             ObjectAvoidance();
 
             //transform.position += m_velocity * Time.deltaTime;
-            m_characterController.Move(m_velocity * Time.deltaTime);
+            transform.position += transform.forward * m_maxSpeed * Time.deltaTime;
+            //m_characterController.Move(m_velocity * Time.deltaTime);
 
             Quaternion targetRotation = Quaternion.LookRotation(m_velocity);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * m_rotationSpeed);
@@ -90,14 +89,14 @@ public class Fish : MonoBehaviour
         rays[2] = new Ray(transform.position, transform.rotation * new Vector3(0, Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad)));
         rays[3] = new Ray(transform.position, transform.rotation * new Vector3(0, Mathf.Sin(-angle * Mathf.Deg2Rad), Mathf.Cos(-angle * Mathf.Deg2Rad)));
 
-        foreach (Ray ray in rays)
+        for (int i = 0; i < rays.Length; i++)
         {            
-            Debug.DrawRay(ray.origin, ray.direction * m_avoidanceDistance, Color.blue);
+            Debug.DrawRay(rays[i].origin, rays[i].direction * m_avoidanceDistance, Color.blue);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, m_avoidanceDistance, 1 << LayerMask.NameToLayer("Fish")))
+            if (Physics.Raycast(rays[i], out hit, m_avoidanceDistance, 1 << LayerMask.NameToLayer("Fish")))
             {
-                m_velocity = Vector3.ClampMagnitude(m_velocity + (-ray.direction * (hit.distance / m_avoidanceDistance * Time.deltaTime * m_avoidanceStrength)), m_maxSpeed);
-                Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.red);
+                m_velocity = Vector3.ClampMagnitude(m_velocity + ((i == 0 || i == 2) ? rays[i+1].direction : rays[i-1].direction * (hit.distance / m_avoidanceDistance * Time.deltaTime * m_avoidanceStrength)), m_maxSpeed);
+                Debug.DrawRay(rays[i].origin, rays[i].direction * hit.distance, Color.red);
             }
         }
     }
@@ -105,10 +104,14 @@ public class Fish : MonoBehaviour
     void Facing()
     {
         m_velocity -= m_velocity * Time.deltaTime;
-        //transform.position += m_velocity * Time.deltaTime;
-        m_characterController.Move(m_velocity * Time.deltaTime);
+        transform.position += m_velocity * Time.deltaTime;
 
         Quaternion targetRotation = Quaternion.LookRotation(m_master.m_camera.position - transform.position);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * m_rotationSpeed);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(m_target, 0.01f);
     }
 }
