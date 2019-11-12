@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45138472, g: 0.5009074, b: 0.57249683, a: 1}
+  m_IndirectSpecularColor: {r: 0.4513849, g: 0.50090855, b: 0.5724978, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1660,11 +1660,6 @@ MonoBehaviour:
       type: 3}
     m_speedRange: {x: 0.1, y: 0.15}
     m_spawnRange: {x: 3, y: 4}
-  - m_typeName: HeartFish
-    m_prefab: {fileID: 6340146968181561628, guid: 744f8616b3ec3ae4f9fc5caee32ce7d4,
-      type: 3}
-    m_speedRange: {x: 0.05, y: 0.09}
-    m_spawnRange: {x: 1, y: 5}
   - m_typeName: RoyalAngelFish
     m_prefab: {fileID: 8669643057910280080, guid: f15fcdc8af2f9644d8a3d921277648a0,
       type: 3}
@@ -1953,7 +1948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 413728, guid: d4585ed830eff4aee82fcae2a5d7b127, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 413728, guid: d4585ed830eff4aee82fcae2a5d7b127, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3737,6 +3732,12 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 357370fb7f22e9443aa330ebe70e524c, type: 2}
+    - target: {fileID: 3323077033562509519, guid: 62848d064d5b172468ef8c3794e11f2e,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -3138687488762004178, guid: c74f747e13d75144ca9e433e97be0fd1,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62848d064d5b172468ef8c3794e11f2e, type: 3}
 --- !u!1001 &2139675664
@@ -3843,7 +3844,7 @@ PrefabInstance:
     - target: {fileID: 8669643057910280080, guid: f15fcdc8af2f9644d8a3d921277648a0,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8763237227369295327, guid: f15fcdc8af2f9644d8a3d921277648a0,
         type: 3}
@@ -3927,7 +3928,7 @@ PrefabInstance:
     - target: {fileID: 1524977228600556247, guid: 251641e119e5b504a99c5bba037afb0c,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7860466389773408763, guid: 251641e119e5b504a99c5bba037afb0c,
         type: 3}
@@ -4011,7 +4012,7 @@ PrefabInstance:
     - target: {fileID: 6340146968181561628, guid: 744f8616b3ec3ae4f9fc5caee32ce7d4,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 545396152780564097, guid: 744f8616b3ec3ae4f9fc5caee32ce7d4,
         type: 3}
@@ -4095,7 +4096,7 @@ PrefabInstance:
     - target: {fileID: 6345462903963095831, guid: 0054a822f22c7e848b8a7ccb0733a003,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4167127796940641916, guid: 0054a822f22c7e848b8a7ccb0733a003,
         type: 3}
