@@ -9,6 +9,7 @@ public class FishType
     public GameObject PreFab { get { return m_prefab; } }
     public Vector2 SpeedRange { get { return m_speedRange; } }
     public Vector2Int SpawnRange { get { return m_spawnRange; } }
+    public Vector2 LookDurationRange { get { return m_lookDurationRange; } }
 
     [SerializeField]
     private string m_typeName;
@@ -18,6 +19,8 @@ public class FishType
     private Vector2 m_speedRange;
     [SerializeField]
     private Vector2Int m_spawnRange;
+    [SerializeField]
+    private Vector2 m_lookDurationRange;
 }
 
 public class FishMaster : MonoBehaviour
@@ -42,6 +45,7 @@ public class FishMaster : MonoBehaviour
                 {
                     fishScript.m_maxSpeed = Random.Range(fish.SpeedRange.x, fish.SpeedRange.y);
                     fishScript.m_master = this;
+                    fishScript.m_lookDuration = Random.Range(fish.LookDurationRange.x, fish.LookDurationRange.y);
                 }
                 else
                 {

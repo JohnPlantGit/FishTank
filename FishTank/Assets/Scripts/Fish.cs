@@ -17,10 +17,12 @@ public class Fish : MonoBehaviour
     public float m_avoidanceStrength;
     public Vector3 m_target;
     public FishMaster m_master;
+    public float m_lookDuration;
 
     Vector3 m_velocity;
     bool m_hasTarget;
     FishState m_state = FishState.Swimming;
+    float m_lookTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -36,16 +38,22 @@ public class Fish : MonoBehaviour
         {
             case FishState.Swimming:
                 Swimming();
+
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    m_state = FishState.Facing;                    
+                    m_state = FishState.Facing;
+                    m_lookTimer = 0;
                 }
+
                 break;
 
             case FishState.Facing:
                 Facing();
-                if (Input.GetKeyDown(KeyCode.Space))
+
+                m_lookTimer += Time.deltaTime;
+                if (m_lookTimer > m_lookDuration)
                     m_state = FishState.Swimming;
+
                 break;
         }
     }
@@ -63,8 +71,8 @@ public class Fish : MonoBehaviour
 
             ObjectAvoidance();
 
-            //transform.position += m_velocity * Time.deltaTime;
-            transform.position += transform.forward * m_maxSpeed * Time.deltaTime;
+            transform.position += m_velocity * Time.deltaTime;
+            //transform.position += transform.forward * m_maxSpeed * Time.deltaTime;
             //m_characterController.Move(m_velocity * Time.deltaTime);
 
             Quaternion targetRotation = Quaternion.LookRotation(m_velocity);
@@ -95,7 +103,13 @@ public class Fish : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(rays[i], out hit, m_avoidanceDistance, 1 << LayerMask.NameToLayer("Fish")))
             {
-                m_velocity = Vector3.ClampMagnitude(m_velocity + ((i == 0 || i == 2) ? rays[i+1].direction : rays[i-1].direction * (hit.distance / m_avoidanceDistance * Time.deltaTime * m_avoidanceStrength)), m_maxSpeed);
+                Vector3 direction;
+                if (i == 0 || i == 2)
+                    direction = rays[i + 1].direction;
+                else
+                    direction = rays[i - 1].direction;
+
+                m_velocity = Vector3.ClampMagnitude(m_velocity + (direction * (hit.distance / m_avoidanceDistance * Time.deltaTime * m_avoidanceStrength)), m_maxSpeed);
                 Debug.DrawRay(rays[i].origin, rays[i].direction * hit.distance, Color.red);
             }
         }
