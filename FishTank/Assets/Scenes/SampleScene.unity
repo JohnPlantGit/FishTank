@@ -1689,6 +1689,12 @@ MonoBehaviour:
     m_speedRange: {x: 0.08, y: 0.12}
     m_spawnRange: {x: 2, y: 3}
     m_lookDurationRange: {x: 3, y: 5}
+  - m_typeName: HeartFish
+    m_prefab: {fileID: 6340146968181561628, guid: 744f8616b3ec3ae4f9fc5caee32ce7d4,
+      type: 3}
+    m_speedRange: {x: 0.08, y: 0.12}
+    m_spawnRange: {x: 2, y: 3}
+    m_lookDurationRange: {x: 3, y: 5}
   m_extents: {x: 0.65, y: 0.3, z: 0.3}
   m_camera: {fileID: 963194228}
   m_fishTurnDelay: 20
