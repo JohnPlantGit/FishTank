@@ -1631,7 +1631,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018462486}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1221780779}
@@ -1655,18 +1655,22 @@ MonoBehaviour:
       type: 3}
     m_speedRange: {x: 0.05, y: 0.1}
     m_spawnRange: {x: 3, y: 5}
+    m_lookDurationRange: {x: 3, y: 5}
   - m_typeName: ClownFish
     m_prefab: {fileID: 6345462903963095831, guid: 0054a822f22c7e848b8a7ccb0733a003,
       type: 3}
     m_speedRange: {x: 0.1, y: 0.15}
     m_spawnRange: {x: 3, y: 4}
+    m_lookDurationRange: {x: 3, y: 5}
   - m_typeName: RoyalAngelFish
     m_prefab: {fileID: 8669643057910280080, guid: f15fcdc8af2f9644d8a3d921277648a0,
       type: 3}
     m_speedRange: {x: 0.08, y: 0.12}
     m_spawnRange: {x: 2, y: 3}
+    m_lookDurationRange: {x: 3, y: 5}
   m_extents: {x: 0.6, y: 0.2, z: 0.2}
   m_camera: {fileID: 963194228}
+  m_fishTurnDelay: 20
 --- !u!1 &1021771455
 GameObject:
   m_ObjectHideFlags: 0

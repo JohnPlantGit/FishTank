@@ -28,10 +28,16 @@ public class FishMaster : MonoBehaviour
     public FishType[] m_fishTypes;
     public Vector3 m_extents;
     public Transform m_camera;
+    public float m_fishTurnDelay;
+
+    float m_fishTurnTimer;
+    List<Fish> m_spawnedFishes;
 
     // Start is called before the first frame update
     void Start()
     {
+        m_spawnedFishes = new List<Fish>();
+
         foreach (FishType fish in m_fishTypes)
         {
             int count = Random.Range(fish.SpawnRange.x, fish.SpawnRange.y);
@@ -46,6 +52,8 @@ public class FishMaster : MonoBehaviour
                     fishScript.m_maxSpeed = Random.Range(fish.SpeedRange.x, fish.SpeedRange.y);
                     fishScript.m_master = this;
                     fishScript.m_lookDuration = Random.Range(fish.LookDurationRange.x, fish.LookDurationRange.y);
+
+                    m_spawnedFishes.Add(fishScript);
                 }
                 else
                 {
@@ -58,7 +66,17 @@ public class FishMaster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        m_fishTurnTimer += Time.deltaTime;
+        m_fishTurnTimer = Mathf.Clamp(m_fishTurnTimer, 0, m_fishTurnDelay);
+
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0)) && m_fishTurnTimer >= m_fishTurnDelay)
+        {
+            foreach(Fish fish in m_spawnedFishes)
+            {
+                fish.State = FishState.Facing;
+            }
+            m_fishTurnTimer = 0;
+        }
     }
 
     public Vector3 RandomPosition()

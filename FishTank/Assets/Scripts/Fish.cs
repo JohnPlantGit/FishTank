@@ -24,6 +24,19 @@ public class Fish : MonoBehaviour
     FishState m_state = FishState.Swimming;
     float m_lookTimer;
 
+    public FishState State
+    {
+        get { return m_state; }
+        set
+        {
+            m_state = value;
+            if (m_state == FishState.Facing)
+            {
+                m_lookTimer = 0;
+            }
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,11 +52,11 @@ public class Fish : MonoBehaviour
             case FishState.Swimming:
                 Swimming();
 
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    m_state = FishState.Facing;
-                    m_lookTimer = 0;
-                }
+                //if (Input.GetKeyDown(KeyCode.Space))
+                //{
+                //    m_state = FishState.Facing;
+                //    m_lookTimer = 0;
+                //}
 
                 break;
 
